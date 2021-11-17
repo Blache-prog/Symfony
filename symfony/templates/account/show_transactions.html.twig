@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account transactions{% endblock %}
+
+{% block body %}
+    <table>
+    {% for transaction in account.debitTransactions|merge(account.creditTransactions)|sort((a, b) => a.date > b.date) %}
+        <tr>
+            <td>{{ transaction.label }}</td>
+            <td>{{ transaction.date|date('d-m-Y H:i:s') }}</td>
+            <td>{% if transaction.amount < 0 %}
+                {{ transaction.amount }}
+            {% endif %}</td>
+            <td>{% if transaction.amount >= 0 %}
+                {{ transaction.amount }}
+            {% endif %}</td>
+    {% endfor %}
+    </table>
+{% endblock %}

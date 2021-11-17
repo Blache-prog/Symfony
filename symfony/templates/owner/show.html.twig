@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Owner{% endblock %}
+
+{% block body %}
+    <h1>Owner</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ owner.id }}</td>
+            </tr>
+            <tr>
+                <th>Fistname</th>
+                <td>{{ owner.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ owner.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Birthday</th>
+                <td>{{ owner.birthday ? owner.birthday|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ owner.email }}</td>
+            </tr>
+            <tr>
+                <th>PhoneNumber</th>
+                <td>{{ owner.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Accounts</th>
+                <td><ul>
+                    {% for account in owner.accounts %}
+                        <li>{{ account.iban }} - {{ account.balance }} - {{ account.type }}</li>
+                    {% endfor %}
+                </ul></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('owner_index') }}">back to list</a>
+
+    <a href="{{ path('owner_edit', {'id': owner.id}) }}">edit</a>
+
+    <a href="{{ path('transaction_new_owner', {'id': owner.id}) }}">Create new transaction</a>
+
+    {{ include('owner/_delete_form.html.twig') }}
+{% endblock %}

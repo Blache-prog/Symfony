@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    <h1>Account</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ account.id }}</td>
+            </tr>
+            <tr>
+                <th>Iban</th>
+                <td>{{ account.iban }}</td>
+            </tr>
+            <tr>
+                <th>Balance</th>
+                <td>{{ account.balance }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ account.type }}</td>
+            </tr>
+            <tr>
+                <th>Owner</th>
+                <td>{{ account.owner.email }}</td>
+            </tr>
+            <tr>
+                <th>Minimum Balance</th>
+                <td>{{ account.minimumBalance }}</td>
+            </tr>
+            {# <tr>
+                <th>Debit transactions</th>
+                <td>{% for debitTransaction in account.debitTransactions %}
+                        -{{debitTransaction.amount}}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Credit transactions</th>
+                <td>{% for creditTransaction in account.creditTransactions %}
+                        {{creditTransaction.amount}}
+                    {% endfor %}
+                </td>
+            </tr> #}
+        </tbody>
+    </table>
+
+    <a href="{{ path('account_transactions', {'id': account.id}) }}">Show transactions</a>
+
+    <a href="{{ path('account_index') }}">back to list</a>
+
+    <a href="{{ path('account_edit', {'id': account.id}) }}">edit</a>
+
+    {{ include('account/_delete_form.html.twig') }}
+{% endblock %}
