@@ -19,7 +19,7 @@ class AccountType extends AbstractType
             ->add('type')
             ->add('owner', EntityType::class,[
                 'class' => Owner::class,
-                'choice_label' => 'email'
+                'choice_label' => 'email',
             ])
             ->add('minimumBalance')
         ;
